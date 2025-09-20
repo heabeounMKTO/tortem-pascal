@@ -6,15 +6,14 @@ unit vec3;
 interface
 
 type
-  TVector3 = class
+  generic TVector3<T> = class
   public
-    x, y, z: Double;
-
-    constructor Create(ax, ay, az: Double);
+    x, y, z: T;
+    constructor Create(ax, ay, az: T);
     function Length: Double;
-    procedure Normalize;
-    function Add(v: TVector3): TVector3;
-    function Scale(f: Double): TVector3;
+    function Normalize: specialize TVector3<Double>;
+    function Add(v: specialize TVector3<T>): specialize TVector3<T>;
+    function Scale(f: Double): specialize TVector3<Double>;
     procedure Print;
   end;
 
@@ -23,7 +22,7 @@ implementation
 uses
   Math;  { for Sqrt }
 
-constructor TVector3.Create(ax, ay, az: Double);
+constructor TVector3.Create(ax, ay, az: T);
 begin
   x := ax;
   y := ay;
@@ -35,32 +34,30 @@ begin
   Length := Sqrt(x*x + y*y + z*z);
 end;
 
-procedure TVector3.Normalize;
+function TVector3.Normalize: specialize TVector3<Double>;
 var
   len: Double;
 begin
-  len := Length;
+  len := Sqrt(x*x + y*y + z*z);  { cast T to Double automatically }
   if len <> 0 then
-  begin
-    x := x / len;
-    y := y / len;
-    z := z / len;
-  end;
+    Normalize := specialize TVector3<Double>.Create(x/len, y/len, z/len)
+  else
+    Normalize := specialize TVector3<Double>.Create(0,0,0);
 end;
 
-function TVector3.Add(v: TVector3): TVector3;
+function TVector3.Add(v: specialize TVector3<T>): specialize TVector3<T>;
 begin
-  Add := TVector3.Create(x + v.x, y + v.y, z + v.z);
+  Add := specialize TVector3<T>.Create(x + v.x, y + v.y, z + v.z);
 end;
 
-function TVector3.Scale(f: Double): TVector3;
+function TVector3.Scale(f: Double): specialize TVector3<Double>;
 begin
-  Scale := TVector3.Create(x * f, y * f, z * f);
+  Scale := specialize TVector3<Double>.Create(x * f, y * f, z * f);
 end;
 
 procedure TVector3.Print;
 begin
-  writeln('(', x:0:2, ', ', y:0:2, ', ', z:0:2, ')');
+  writeln('(', x, ', ', y, ', ', z, ')');
 end;
 
 end.  { Vector3 unit }
