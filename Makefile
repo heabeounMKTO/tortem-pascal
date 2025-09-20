@@ -1,2 +1,3 @@
 main:
-	fpc main.pas
+	fpc build/main.pas
+
