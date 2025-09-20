@@ -13,6 +13,8 @@ type
     function Length: Double;
     function Normalize: specialize TVector3<Double>;
     function Add(v: specialize TVector3<T>): specialize TVector3<T>;
+    function Sub(v: specialize TVector3<T>): specialize TVector3<T>;
+    function Mul(v: specialize TVector3<T>): specialize TVector3<T>;
     function Scale(f: Double): specialize TVector3<Double>;
     procedure Print;
   end;
@@ -49,6 +51,18 @@ function TVector3.Add(v: specialize TVector3<T>): specialize TVector3<T>;
 begin
   Add := specialize TVector3<T>.Create(x + v.x, y + v.y, z + v.z);
 end;
+
+
+function TVector3.Sub(v: specialize TVector3<T>): specialize TVector3<T>;
+begin
+  Sub := specialize TVector3<T>.Create(x - v.x, y - v.y, z - v.z);
+end;
+
+function TVector3.Mul(v: specialize TVector3<T>): specialize TVector3<T>;
+begin
+  Mul := specialize TVector3<T>.Create(x * v.x, y * v.y, z * v.z);
+end;
+
 
 function TVector3.Scale(f: Double): specialize TVector3<Double>;
 begin
