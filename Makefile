@@ -1,3 +1,3 @@
 main:
-	fpc build/main.pas
+	fpc main.pas -FEbuild
 

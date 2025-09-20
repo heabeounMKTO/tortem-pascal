@@ -1,6 +1,8 @@
 program RayTrace;
-uses SysUtils;
-
+uses 
+	SysUtils,
+	utils,
+	vec3;
 
 const 
   width = 400;
@@ -9,7 +11,6 @@ const
 
 var 
   i,j: Integer;
-  u,v: Real;
   r,g,b: Integer;
   f: TextFile;
 

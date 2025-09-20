@@ -11,6 +11,7 @@
 #
 .ppm
 build/
+*.ppu
 # Diagram Portfolio file. Used by the diagram editor up to Delphi 7.
 # Uncomment this if you are not using diagrams or use newer Delphi version.
 #*.ddp
