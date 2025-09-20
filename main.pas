@@ -2,6 +2,7 @@ program RayTrace;
 uses 
 	SysUtils,
 	utils,
+	ray,
 	vec3;
 
 const 
